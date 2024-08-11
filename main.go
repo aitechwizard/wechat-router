@@ -21,14 +21,13 @@ func init() {
 	// 2. config init
 	err := config.InitConfig()
 	if err != nil {
-		slog.Error("config init failed", "err", err)
-		os.Exit(1)
+		panic("config init failed, err is:" + err.Error())
 	}
 
 	// 3. WeChat bot init
 	if err = bot.Init(); err != nil {
 		slog.Error("wechat init login failed", "err", err)
-		os.Exit(1)
+		panic("wechat init login failed, err is:" + err.Error())
 	}
 	slog.Info("wechat login success!")
 }
