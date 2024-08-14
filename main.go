@@ -42,7 +42,10 @@ func main() {
 	slog.Info("self info", "info", utils.MarshalAnyToString(self))
 
 	bot.Bot.MessageHandler = MessageHandler // 微信消息回调注册
-	bot.Bot.Block()
+	err = bot.Bot.Block()
+	if err != nil {
+		slog.Error("bot crash, reason is:", "err", err)
+	}
 
 	// 示警
 	notify.WxPushNotice("微信已退出")
